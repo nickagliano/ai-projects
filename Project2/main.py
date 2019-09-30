@@ -1,5 +1,6 @@
 # import csv package for csv handling
 import csv
+
 # import numpy for vectors
 import numpy as np
 
@@ -12,34 +13,24 @@ print('...')
 
 print('importing data for training')
 
-# fake training data
-# training_inputs = []
-# training_inputs.append(np.array([1, 1]))
-# training_inputs.append(np.array([1, 0]))
-# training_inputs.append(np.array([0, 1]))
-# training_inputs.append(np.array([0, 0]))
-#
-# labels = np.array([1, 0, 0, 0]) # here we store the expected outputs
-# 									# making sure each index lines up with the index
-# 									# of the input it's meant to represent
+# declare full dataset, will be populated by csvfile reader
+full_dataset = []
 
-# import data, put it in correct form for perceptron
-training_inputs = []
+# declare empty labels array, will hold the class of the data
 labels = np.array([])
+
+# populate full_dataset array
 with open('Project2_data/normalized/groupA.csv', 'rt') as csvfile:
 	groupA = list(csv.reader(csvfile))
 
 	for row in groupA:
-		training_inputs.append(np.array([float(row[0]), float(row[1])])) # append to 2d array with x, y values
+		full_dataset.append(np.array([float(row[0]), float(row[1])])) # append to 2d array with x, y values
 		labels = np.append(labels, int(row[2])) # append class for that row into labels vector
 
 print('...')
-#
-# print(training_inputs)
 
 # -----------------------------------------------------------------------------
 # hard, unipolar activation function, using 75% of data
-#
 
 hard_perceptron = Perceptron.Perceptron(2) # 2 is number of inputs
 
@@ -47,7 +38,11 @@ print('training perceptron with hard, unipolar activation function, using 75% of
 
 print('...')
 
-hard_perceptron.train_hard(training_inputs, labels)
+datasets = split_data(full_dataset, 75)
+training_data = datasets[0]
+testing_data = datasets[1]
+
+hard_perceptron.train_hard(training_data, labels)
 
 print('perceptron done training, printing results...')
 
@@ -64,7 +59,7 @@ print('...')
 #
 # print('...')
 #
-# hard_perceptron.train_hard(training_inputs, labels)
+# hard_perceptron.train_hard(full_dataset, labels)
 #
 # print('perceptron done training, printing results...')
 #
@@ -75,51 +70,20 @@ print('...')
 # # -----------------------------------------------------------------------------
 # # soft, unipolar activation function, using 75% of data
 #
-# soft_perceptron = Perceptron.Perceptron(2) # 2 is number of inputs
-#
-# print('training perceptron with soft, unipolar activation function, using 75% of data')
-#
-# print('...')
-#
-# soft_ perceptron.train_soft(training_inputs, labels)
-#
-# print('perceptron done training, printing results...')
-#
-# soft_perceptron.print_results()
-#
-# print('...')
-#
-# # -----------------------------------------------------------------------------
-# # soft, unipolar activation function, using 25% of data
-#
-# soft_perceptron = Perceptron.Perceptron(2) # 2 is number of inputs
-#
-# print('training perceptron with soft, unipolar activation function, using 25% of data')
-#
-# print('...')
-#
-# soft_perceptron.train_soft(training_inputs, labels)
-#
-# print('perceptron done training, printing results...')
-#
-# soft_perceptron.print_results()
-#
-# print('...')
-
-
-
 
 print('finished')
 
 
 
-# import groupA data
-# with open('Project2_data/normalized/groupA.csv', 'rt') as csvfile:
-# 	groupA = list(csv.reader(csvfile))
-#
-# 	print(groupA)
-#
+# dataset is the full dataset
+# percent training is what percent of the dataset will be used for training
+def split_data(dataset, percent_training):
+	# split datasets
 
-# main function for running perceptrons
-# declare perceptrons,
-# 	call perceptron methods with desired input parameters, datasets, etc.
+	# using pop() and random number in a range
+
+	# training = percent_of full dataset used for training
+
+	# testing = full dataset - percent used for training
+
+	return (training, testing)
