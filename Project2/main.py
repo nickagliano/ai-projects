@@ -13,27 +13,33 @@ print('...')
 print('importing data for training')
 
 # fake training data
+# training_inputs = []
+# training_inputs.append(np.array([1, 1]))
+# training_inputs.append(np.array([1, 0]))
+# training_inputs.append(np.array([0, 1]))
+# training_inputs.append(np.array([0, 0]))
+#
+# labels = np.array([1, 0, 0, 0]) # here we store the expected outputs
+# 									# making sure each index lines up with the index
+# 									# of the input it's meant to represent
+
+# import data, put it in correct form for perceptron
 training_inputs = []
-training_inputs.append(np.array([1, 1]))
-training_inputs.append(np.array([1, 0]))
-training_inputs.append(np.array([0, 1]))
-training_inputs.append(np.array([0, 0]))
+labels = np.array([])
+with open('Project2_data/normalized/groupA.csv', 'rt') as csvfile:
+	groupA = list(csv.reader(csvfile))
 
-labels = np.array([1, 0, 0, 0]) # here we store the expected outputs
-									# making sure each index lines up with the index
-									# of the input it's meant to represent
-
-# import data, put in correct form for perceptron
-
-
-
+	for row in groupA:
+		training_inputs.append(np.array([float(row[0]), float(row[1])])) # append to 2d array with x, y values
+		labels = np.append(labels, int(row[2])) # append class for that row into labels vector
 
 print('...')
+#
+# print(training_inputs)
 
 # -----------------------------------------------------------------------------
 # hard, unipolar activation function, using 75% of data
-
-print('training perceptron with hard, unipolar activation function')
+#
 
 hard_perceptron = Perceptron.Perceptron(2) # 2 is number of inputs
 
@@ -41,11 +47,11 @@ print('training perceptron with hard, unipolar activation function, using 75% of
 
 print('...')
 
-perceptron.train_hard(training_inputs, labels)
+hard_perceptron.train_hard(training_inputs, labels)
 
 print('perceptron done training, printing results...')
 
-perceptron.print_results()
+hard_perceptron.print_results()
 
 print('...')
 
@@ -58,11 +64,11 @@ print('...')
 #
 # print('...')
 #
-# perceptron.train_hard(training_inputs, labels)
+# hard_perceptron.train_hard(training_inputs, labels)
 #
 # print('perceptron done training, printing results...')
 #
-# perceptron.print_results()
+# hard_perceptron.print_results()
 #
 # print('...')
 #

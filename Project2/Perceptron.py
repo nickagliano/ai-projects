@@ -33,7 +33,18 @@ class Perceptron(object):
 				prediction = self.predict_hard(inputs)
 				self.weights[1:] += self.learning_rate * (label - prediction) * inputs # error = (label - prediction)
 				self.weights[0] += self.learning_rate * (label - prediction)
+			if _ == 1000:
+				print('25% done training')
+				print('...')
+			elif _ == 2000:
+				print('50% done training')
+				print('...')
+			elif _ == 3000:
+				print('75% done training')
+				print('...')
 
+
+	# to easily present the findings!
 	def print_results(self):
 		print('weight of x: ' + str(self.weights[0]))
 		print('weight of y: ' + str(self.weights[1]))
