@@ -47,11 +47,7 @@ class Perceptron(object):
 				print('...')
 
 
-	# to easily present the findings!
-	def print_results(self):
-		print('weight of x: ' + str(self.weights[0]))
-		print('weight of y: ' + str(self.weights[1]))
-		print('weight of bias: ' + str(self.weights[2]))
+
 
 	# set error thresholds:
 	# E < 10^-5 for Group A,
@@ -72,3 +68,10 @@ class Perceptron(object):
 		else: #
 		  activation = output
 		return activation
+
+
+	# to easily present the findings!
+	def print_results(self):
+		print('weight of x: ' + str(self.weights[1]))
+		print('weight of y: ' + str(self.weights[2]))
+		print('weight of bias: ' + str(self.weights[0]))
