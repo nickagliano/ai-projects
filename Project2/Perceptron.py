@@ -69,7 +69,7 @@ class Perceptron(object):
 		  activation = output
 		return activation
 
-
+#fdjkal;fjkdlsa;
 	# to easily present the findings!
 	def print_results(self):
 		print('weight of x: ' + str(self.weights[1]))
