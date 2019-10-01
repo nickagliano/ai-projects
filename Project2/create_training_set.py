@@ -8,7 +8,7 @@ female = []
 training = []
 testing = []
 count = 0
-with open('groupC.csv') as data:
+with open('groupA.csv') as data:
     csvReader = csv.reader(data)
     for row in csvReader:
         dataset.append(row)
@@ -27,7 +27,7 @@ random.shuffle(female)
 
 i = 0
 while i < 2000:
-    if i < 1500:
+    if i < 500:
         training.append(male[i])
         training.append(female[i])
     else:
@@ -38,12 +38,12 @@ while i < 2000:
 random.shuffle(training)
 random.shuffle(testing)
 
-with open('trainingC.csv', 'w', newline = '') as csvfile:
+with open('training_A_25.csv', 'w', newline = '') as csvfile:
     writer = csv.writer(csvfile)
     for row in training:
         writer.writerow(row)
 
-with open('testingC.csv', 'w', newline = '') as csvfile:
+with open('testing_A_75.csv', 'w', newline = '') as csvfile:
     writer = csv.writer(csvfile)
     for row in testing:
         writer.writerow(row)
