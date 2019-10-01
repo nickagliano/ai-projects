@@ -17,9 +17,9 @@ class Perceptron(object):
 		#random.uniform(-0.5, 0.5)
 		self.weights = np.zeros(no_of_inputs + 1) # array of weights
 
-	#hyperbolic activation function
-	def tanh(x):
-		return (2/(1 + np.exp(-2z))-1
+	#unipolar soft activation function
+	def sigmoid(x):
+  		return 1 / (1 + math.exp(-x))
 
 	# unipolar hard activation function, called by train_hard function
 	def predict_hard(self, inputs):
