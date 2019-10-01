@@ -1,11 +1,29 @@
 # import csv package for csv handling
 import csv
+import random
 
 # import numpy for vectors
 import numpy as np
 
 # import perceptron class
 import Perceptron as Perceptron
+
+# dataset is the full dataset
+# percent training is what percent of the dataset will be used for training
+def split_data(dataset, percent_training):
+	# split datasets
+	i = 0;
+	training = []
+	testing = []
+	random.shuffle(dataset)
+	n = 4000 * percent_training
+	while i < 4000:
+		if i < n:
+			training.append(dataset[i])
+		else:
+			testing.append(dataset[i])
+		i += 1
+	return (training, testing)
 
 print('starting main method')
 
@@ -37,12 +55,10 @@ hard_perceptron = Perceptron.Perceptron(2) # 2 is number of inputs
 print('training perceptron with hard, unipolar activation function, using 75% of data')
 
 print('...')
-
-datasets = split_data(full_dataset, 75)
+datasets = split_data(groupA, 0.75)
 training_data = datasets[0]
 testing_data = datasets[1]
-
-hard_perceptron.train_hard(training_data, labels)
+#hard_perceptron.train_hard(training_data, labels)
 
 print('perceptron done training, printing results...')
 
@@ -72,18 +88,3 @@ print('...')
 #
 
 print('finished')
-
-
-
-# dataset is the full dataset
-# percent training is what percent of the dataset will be used for training
-def split_data(dataset, percent_training):
-	# split datasets
-
-	# using pop() and random number in a range
-
-	# training = percent_of full dataset used for training
-
-	# testing = full dataset - percent used for training
-
-	return (training, testing)
