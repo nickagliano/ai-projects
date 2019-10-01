@@ -1,5 +1,5 @@
 import numpy as np # numpy is for vectors
-
+import random
 # IMPORTANT NOTE:
 #	The data set lists all male and then all female data points. Think about which
 #	data points you should use for training and which for testing --
@@ -14,8 +14,12 @@ class Perceptron(object):
 		self.learning_rate = learning_rate # AKA 'alpha', 'learning constant'
 
 		# initalize weights to random between (-.5, .5)
+		#random.uniform(-0.5, 0.5)
 		self.weights = np.zeros(no_of_inputs + 1) # array of weights
 
+	#hyperbolic activation function
+	def tanh(x):
+		return (2/(1 + np.exp(-2z))-1
 
 	# unipolar hard activation function, called by train_hard function
 	def predict_hard(self, inputs):
@@ -28,8 +32,8 @@ class Perceptron(object):
 
 	# set error thresholds:
 	# E < 10^-5 for Group A,
-	# E < 10^-1 for Group B,
-	# E < 5 * 10^-1 for Group C
+	# E < 10^2 for Group B,
+	# E < 1.45 * 10^3 for Group C
 	def train_hard(self, training_inputs, labels): # add parameter for '% of data used for training
 		for _ in range(self.iterations):
 			for inputs, label in zip(training_inputs, labels):
