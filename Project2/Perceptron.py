@@ -7,7 +7,7 @@ import random
 
 class Perceptron(object):
 
-	def __init__(self, no_of_inputs, iterations=5000, learning_rate=0.1):
+	def __init__(self, no_of_inputs, iterations=5000, learning_rate=0.01):
 		# number of patterns? (2d array?)
 		# desired output array? (is this supervised or unsupervised?)
 		self.iterations = iterations # number of iterations
@@ -16,6 +16,7 @@ class Perceptron(object):
 		# initalize weights to random between (-.5, .5)
 		#random.uniform(-0.5, 0.5)
 		self.weights = [random.uniform(-0.5,0.5),random.uniform(-0.5,0.5),random.uniform(-0.5,0.5)]
+		print(self.weights)
 		#self.weights = np.zeros(no_of_inputs + 1) # array of weights
 
 	#unipolar soft activation function
@@ -61,7 +62,6 @@ class Perceptron(object):
 			elif _ == 3000:
 				print('75% done training')
 				print('...')
-			print(error)
 			count += 1
 	# set error thresholds:
 	# E < 10^-5 for Group A,
