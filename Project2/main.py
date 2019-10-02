@@ -116,11 +116,19 @@ print('...')
 print('importing data for training')
 
 
+<<<<<<< HEAD
 # populate groupA list
 with open('Project2_data/normalized/groupA.csv', 'rt') as csvfile:
 	groupA = list(csv.reader(csvfile))
 
 print('...')
+=======
+# # populate groupA list
+# with open('Project2_data/normalized/groupA.csv', 'rt') as csvfile:
+# 	groupA = list(csv.reader(csvfile))
+#
+# print('...')
+>>>>>>> e34bb024f9d2997e9ecb0d59ce2a903b69b3fe07
 #
 # print('---------------------- GROUP A ---------------------------------------')
 #
@@ -209,10 +217,111 @@ print('...')
 # plot_hard(hard_perceptron, testing_data, 'Group A Testing, 25%')
 #
 # print('...')
+<<<<<<< HEAD
+=======
+#
+# # -----------------------------------------------------------------------------
+# # -----------------------------------------------------------------------------
+# # -----------------------------------------------------------------------------
+#
+# print('---------------------- GROUP B ---------------------------------------')
+#
+#
+# # populate groupB list
+# with open('Project2_data/normalized/groupB.csv', 'rt') as csvfile:
+# 	groupB = list(csv.reader(csvfile))
+#
+# # -----------------------------------------------------------------------------
+# # hard, unipolar activation function, using 75% of data from group B
+#
+# # declare and instantiate perceptron
+# hard_perceptron = Perceptron.Perceptron(2) # 2 is number of inputs
+#
+# print('training perceptron with hard, unipolar activation function, using 75% of data from group B')
+#
+# print('...')
+#
+# # split data into training and testing datasets
+# datasets = split_data(groupB, 0.75)
+# training_data = datasets[0]
+# testing_data = datasets[1]
+#
+# training_data_no_labels = []
+# labels = np.array([])
+#
+# # iterate through training data to take off labels and put in the form for perceptron class
+# for row in training_data:
+# 	training_data_no_labels.append(np.array([float(row[0]), float(row[1])])) # append to 2d array with x, y values
+# 	labels = np.append(labels, int(row[2])) # append class for that row into labels vector
+#
+# hard_perceptron.train_hard(training_data_no_labels, labels)
+#
+# print('perceptron done training, printing results...')
+#
+# hard_perceptron.print_results()
+#
+# print('...')
+#
+# print('plotting TRAINING data with decision line and calculating the error...')
+#
+# plot_hard(hard_perceptron, training_data, 'Group B Training, 75%')
+#
+# print('...')
+#
+# print('plotting TESTING data with decision line and calculating error...')
+#
+# plot_hard(hard_perceptron, testing_data, 'Group B Testing, 75%')
+#
+# print('...')
+#
+# # # -----------------------------------------------------------------------------
+# # hard, unipolar activation function, using 25% of data from group B
+#
+# # declare and instantiate perceptron
+# hard_perceptron = Perceptron.Perceptron(2) # 2 is number of inputs
+#
+# print('training perceptron with hard, unipolar activation function, using 25% of data from group B')
+#
+# print('...')
+#
+# # split data into training and testing datasets
+# datasets = split_data(groupB, 0.25)
+# training_data = datasets[0]
+# testing_data = datasets[1]
+#
+# training_data_no_labels = []
+# labels = np.array([])
+#
+# # iterate through training data to take off labels and put in the form for perceptron class
+# for row in training_data:
+# 	training_data_no_labels.append(np.array([float(row[0]), float(row[1])])) # append to 2d array with x, y values
+# 	labels = np.append(labels, int(row[2])) # append class for that row into labels vector
+#
+# hard_perceptron.train_hard(training_data_no_labels, labels)
+#
+# print('perceptron done training, printing results...')
+#
+# hard_perceptron.print_results()
+#
+# print('...')
+#
+# print('plotting TRAINING data with decision line and calculating the error...')
+#
+# plot_hard(hard_perceptron, training_data, 'Group B Training, 25%')
+#
+# print('...')
+#
+# print('plotting TESTING data with decision line and calculating error...')
+#
+# plot_hard(hard_perceptron, testing_data, 'Group B Training, 25%')
+#
+# print('...')
+>>>>>>> e34bb024f9d2997e9ecb0d59ce2a903b69b3fe07
 
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
+<<<<<<< HEAD
 #
 # print('---------------------- GROUP B ---------------------------------------')
 #
@@ -306,6 +415,9 @@ print('...')
 # plot_hard(hard_perceptron, testing_data, 'Group B Training, 25%')
 
 print('...')
+=======
+
+>>>>>>> e34bb024f9d2997e9ecb0d59ce2a903b69b3fe07
 print('---------------------- GROUP C ---------------------------------------')
 print('...')
 
