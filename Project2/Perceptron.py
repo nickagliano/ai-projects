@@ -35,7 +35,7 @@ class Perceptron(object):
 	# E < 10^-5 for Group A,
 	# E < 10^2 for Group B,
 	# E < 1.45 * 10^3 for Group C
-	def train_hard(self, training_inputs, labels): # add parameter for '% of data used for training
+	def train_hard(self, training_inputs, labels, stopping_criterion): # add parameter for '% of data used for training
 		count = 0
 		for _ in range(self.iterations):
 			error = 0
@@ -47,7 +47,7 @@ class Perceptron(object):
 				error += int(update != 0.0)
 				#print(error)
 
-			if error < 1450:
+			if error < stopping_criterion:
 				print('Error:  ' + str(error))
 				print('Iterations:  ' + str(count))
 				return None
