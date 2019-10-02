@@ -63,25 +63,25 @@ class Perceptron(object):
 				print('75% done training')
 				print('...')
 			count += 1
-	# set error thresholds:
-	# E < 10^-5 for Group A,
-	# E < 10^-1 for Group B,
-	# E < 5 * 10^-1 for Group C
-	# def train_soft(self, training_inputs, labels):
-	# 	for _ in range(self.iterations):
-	# 		for inputs, label in zip(training_inputs, labels):
-	# 			prediction = self.predict_soft(inputs)
-	# 			self.weights[1:] += self.learning_rate * (label - prediction) * inputs # error = (label - prediction)
-	# 			self.weights[0] += self.learning_rate * (label - prediction)
-	#
-	# # unipolar soft activation function
-	# def predict_soft(self, inputs):
-	# 	summation = np.dot(inputs, self.weights[1:]) + self.weights[0] # deos this need to be tweaked for soft activation function?
-	# 	if summation > condition: # figure out condition for soft activiation function
-	# 	  activation = output # figure out how to calc output
-	# 	else: #
-	# 	  activation = output
-	# 	return activation
+
+
+	# unipolar soft activation function
+	def predict_soft(self, inputs):
+		summation = np.dot(inputs, self.weights[1:]) + self.weights[0] # deos this need to be tweaked for soft activation function?
+		if summation > condition: # figure out condition for soft activiation function
+		  activation = output # figure out how to calc output
+		else: #
+		  activation = output
+		return activation
+
+	def train_soft(self, training_inputs, labels):
+		for _ in range(self.iterations):
+			for inputs, label in zip(training_inputs, labels):
+				prediction = self.predict_soft(inputs)
+				self.weights[1:] += self.learning_rate * (label - prediction) * inputs # error = (label - prediction)
+				self.weights[0] += self.learning_rate * (label - prediction)
+
+
 
 	# to easily present the findings!
 	def print_results(self):

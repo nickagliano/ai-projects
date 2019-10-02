@@ -107,32 +107,20 @@ def plot_hard(perceptron, dataset, plot_title):
 	plt.show()
 
 
+
+# def plot_soft(perceptron, dataset, plot_title):
+
+
 # -----------------------------------------------------------------------------
-
-
-
-print('starting main method')
-print('...')
-print('importing data for training')
-
-
 # populate groupA list
 with open('Project2_data/normalized/groupA.csv', 'rt') as csvfile:
 	groupA = list(csv.reader(csvfile))
-
-print('...')
-
-print('---------------------- GROUP A ---------------------------------------')
 
 # -----------------------------------------------------------------------------
 # hard, unipolar activation function, using 75% of data from group A
 
 # declare and instantiate perceptron
 hard_perceptron = Perceptron.Perceptron(2) # 2 is number of inputs
-
-print('training perceptron with hard, unipolar activation function, using 75% of data')
-
-print('...')
 
 # split data into training and testing datasets
 datasets = split_data(groupA, 0.75)
@@ -149,33 +137,17 @@ for row in training_data:
 
 hard_perceptron.train_hard(training_data_no_labels, labels, 0.00001)
 
-print('perceptron done training, printing results...')
-
 hard_perceptron.print_results()
 
-print('...')
-
-print('plotting TRAINING data with decision line and calculating the error...')
 
 plot_hard(hard_perceptron, training_data, 'Group A Training, 75%')
-
-print('...')
-
-print('plotting TESTING data with decision line and calculating error...')
-
 plot_hard(hard_perceptron, testing_data, 'Group A Testing, 75%')
-
-print('...')
 
 # # -----------------------------------------------------------------------------
 # hard, unipolar activation function, using 25% of data from group A
 
 # declare and instantiate perceptron
 hard_perceptron = Perceptron.Perceptron(2) # 2 is number of inputs
-
-print('training perceptron with hard, unipolar activation function, using 25% of data from group A')
-
-print('...')
 
 # split data into training and testing datasets
 datasets = split_data(groupA, 0.25)
@@ -192,27 +164,21 @@ for row in training_data:
 
 hard_perceptron.train_hard(training_data_no_labels, labels, 0.00001)
 
-print('perceptron done training, printing results...')
-
 hard_perceptron.print_results()
 
-print('...')
-
-print('plotting TRAINING data with decision line and calculating the error...')
-
 plot_hard(hard_perceptron, training_data, 'Group A Training, 25%')
-
-print('...')
-
-print('plotting TESTING data with decision line and calculating error...')
-
 plot_hard(hard_perceptron, testing_data, 'Group A Testing, 25%')
 
-print('...')
+# # -----------------------------------------------------------------------------
+# # soft, unipolar activation function, using 75% of data
+
+
+# # -----------------------------------------------------------------------------
+# # soft, unipolar activation function, using 25% of data
+
 
 # -----------------------------------------------------------------------------
 print('---------------------- GROUP B ---------------------------------------')
-
 
 # populate groupB list
 with open('Project2_data/normalized/groupB.csv', 'rt') as csvfile:
@@ -223,10 +189,6 @@ with open('Project2_data/normalized/groupB.csv', 'rt') as csvfile:
 
 # declare and instantiate perceptron
 hard_perceptron = Perceptron.Perceptron(2) # 2 is number of inputs
-
-print('training perceptron with hard, unipolar activation function, using 75% of data from group B')
-
-print('...')
 
 # split data into training and testing datasets
 datasets = split_data(groupB, 0.75)
@@ -243,33 +205,16 @@ for row in training_data:
 
 hard_perceptron.train_hard(training_data_no_labels, labels, 100)
 
-print('perceptron done training, printing results...')
-
 hard_perceptron.print_results()
 
-print('...')
-
-print('plotting TRAINING data with decision line and calculating the error...')
-
 plot_hard(hard_perceptron, training_data, 'Group B Training, 75%')
-
-print('...')
-
-print('plotting TESTING data with decision line and calculating error...')
-
 plot_hard(hard_perceptron, testing_data, 'Group B Testing, 75%')
-
-print('...')
 
 # # -----------------------------------------------------------------------------
 # hard, unipolar activation function, using 25% of data from group B
 
 # declare and instantiate perceptron
 hard_perceptron = Perceptron.Perceptron(2) # 2 is number of inputs
-
-print('training perceptron with hard, unipolar activation function, using 25% of data from group B')
-
-print('...')
 
 # split data into training and testing datasets
 datasets = split_data(groupB, 0.25)
@@ -286,29 +231,13 @@ for row in training_data:
 
 hard_perceptron.train_hard(training_data_no_labels, labels, 100)
 
-print('perceptron done training, printing results...')
-
 hard_perceptron.print_results()
 
-print('...')
-
-print('plotting TRAINING data with decision line and calculating the error...')
-
 plot_hard(hard_perceptron, training_data, 'Group B Training, 25%')
-
-print('...')
-
-print('plotting TESTING data with decision line and calculating error...')
-
-plot_hard(hard_perceptron, testing_data, 'Group B Training, 25%')
-
-print('...')
+plot_hard(hard_perceptron, testing_data, 'Group B Testing, 25%')
 
 # -----------------------------------------------------------------------------
-# -----------------------------------------------------------------------------
-
 print('---------------------- GROUP C ---------------------------------------')
-print('...')
 
 # populate groupC list
 with open('Project2_data/normalized/groupC.csv', 'rt') as csvfile:
@@ -319,10 +248,6 @@ with open('Project2_data/normalized/groupC.csv', 'rt') as csvfile:
 
 # declare and instantiate perceptron
 hard_perceptron = Perceptron.Perceptron(2) # 2 is number of inputs
-
-print('training perceptron with hard, unipolar activation function, using 75% of data from group C')
-
-print('...')
 
 # split data into training and testing datasets
 datasets = split_data(groupC, 0.75)
@@ -339,33 +264,17 @@ for row in training_data:
 
 hard_perceptron.train_hard(training_data_no_labels, labels, 1450)
 
-print('perceptron done training, printing results...')
-
 hard_perceptron.print_results()
 
-print('...')
-
-print('plotting TRAINING data with decision line and calculating the error...')
-
 plot_hard(hard_perceptron, training_data, 'Group C Training, 75%')
-
-print('...')
-
-print('plotting TESTING data with decision line and calculating error...')
-
 plot_hard(hard_perceptron, testing_data, 'Group C Testing, 75%')
 
-print('...')
 
 # # -----------------------------------------------------------------------------
 # hard, unipolar activation function, using 25% of data from group C
 
 # declare and instantiate perceptron
 hard_perceptron = Perceptron.Perceptron(2) # 2 is number of inputs
-
-print('training perceptron with hard, unipolar activation function, using 25% of data from group C')
-
-print('...')
 
 # split data into training and testing datasets
 datasets = split_data(groupC, 0.25)
@@ -382,25 +291,14 @@ for row in training_data:
 
 hard_perceptron.train_hard(training_data_no_labels, labels, 1450)
 
-print('perceptron done training, printing results...')
-
 hard_perceptron.print_results()
 
-print('...')
-
-print('plotting TRAINING data with decision line and calculating the error...')
-
+# plot training data
 plot_hard(hard_perceptron, training_data, 'Group C Training, 25%')
 
-print('...')
+# plot testing data
+plot_hard(hard_perceptron, testing_data, 'Group C Testing, 25%')
 
-print('plotting TESTING data with decision line and calculating error...')
 
-plot_hard(hard_perceptron, testing_data, 'Group C Training, 25%')
-
-#
-# # -----------------------------------------------------------------------------
-# # soft, unipolar activation function, using 75% of data
-#
 
 print('finished')
