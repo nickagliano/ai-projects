@@ -15,7 +15,8 @@ class Perceptron(object):
 
 		# initalize weights to random between (-.5, .5)
 		#random.uniform(-0.5, 0.5)
-		self.weights = np.zeros(no_of_inputs + 1) # array of weights
+		self.weights = [random.uniform(-0.5,0.5),random.uniform(-0.5,0.5),random.uniform(-0.5,0.5)]
+		#self.weights = np.zeros(no_of_inputs + 1) # array of weights
 
 	#unipolar soft activation function
 	def sigmoid(x):
@@ -35,11 +36,22 @@ class Perceptron(object):
 	# E < 10^2 for Group B,
 	# E < 1.45 * 10^3 for Group C
 	def train_hard(self, training_inputs, labels): # add parameter for '% of data used for training
+		count = 0
 		for _ in range(self.iterations):
+			error = 0
 			for inputs, label in zip(training_inputs, labels):
 				prediction = self.predict_hard(inputs)
+				update = self.learning_rate * (label - prediction)
 				self.weights[1:] += self.learning_rate * (label - prediction) * inputs # error = (label - prediction)
 				self.weights[0] += self.learning_rate * (label - prediction)
+				error += int(update != 0.0)
+				#print(error)
+
+			if error < 1450:
+				print('Error:  ' + str(error))
+				print('Iterations:  ' + str(count))
+				return None
+
 			if _ == 1000:
 				print('25% done training')
 				print('...')
@@ -49,8 +61,8 @@ class Perceptron(object):
 			elif _ == 3000:
 				print('75% done training')
 				print('...')
-
-
+			print(error)
+			count += 1
 	# set error thresholds:
 	# E < 10^-5 for Group A,
 	# E < 10^-1 for Group B,
