@@ -2,6 +2,9 @@ import numpy as np # numpy is for vectors
 import random
 import math
 
+# for plotting the data
+import matplotlib.pyplot as plt
+
 # IMPORTANT NOTE:
 #	The data set lists all male and then all female data points. Think about which
 #	data points you should use for training and which for testing --

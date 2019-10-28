@@ -90,10 +90,7 @@ def plot(perceptron, dataset, plot_title):
 	print('fn=' + str(fn))
 
 	# plotting the male points
-	plt.scatter(maleX, maleY, c=red, label = "Males")
-
-	# plotting the female points
-	plt.scatter(femaleX, femaleY, c=blue, label = "Females")
+	plt.scatter(time, k_watt, c=red, label = "Males")
 
 	# giving a title to my graph
 	plt.title(plot_title)
