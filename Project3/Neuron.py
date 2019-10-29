@@ -55,15 +55,17 @@ class Neuron(object):
 		return error_array
 
 
-	def train(self, time, k_watts):
+	def train(self, time, k_watts, plot_title):
 		count = 0
+		self.total_error_array = []
 		for i in range(self.iterations):
 			error_array = self.get_error(time, k_watts)
 			self.update_weights(time, k_watts, error_array)
 
 			count += 1
-			if (count % 100 == 0):
-				self.plot(time, k_watts, 'Predicted vs Actual after ' + str(i) + ' Iterations')
+			if (count % 1000 == 0):
+				self.plot(time, k_watts, plot_title)
+		print('Sum-squared error for ' + str(plot_title) + ': ' + str(self.total_error_array[-1]))
 		self.plot_error()
 
 	def plot(self, time, k_watts, plot_title):
@@ -85,6 +87,7 @@ class Neuron(object):
 		plt.plot(x_vector, y_vector, '-b', label='Predicted')
 		plt.scatter(time, k_watts, c='red', label = "Actual")
 		plt.title(plot_title)
+		plt.text(-1.5, 4, "Iterations: " + str(self.iterations) + ', alpha = ' + str(self.learning_rate))
 		plt.xlabel('Time (in hours)')
 		plt.ylabel('Energy (in kW)')
 		plt.legend()
@@ -101,6 +104,39 @@ class Neuron(object):
 		plt.ylabel('Sum-squared error')
 		plt.legend()
 		plt.show()
+
+	def test(self, test_times, test_k_watts, plot_title):
+		x_vector = test_times.tolist()
+		y_vector_test = test_k_watts.tolist()
+		y_vector_predict = []
+
+		final_total_error = 0
+
+		# populate y_vector
+		if len(self.weights) == 4: # if cubic
+			for x in x_vector:
+				y_vector_predict.append(self.weights[3]*(x**3) + self.weights[2]*(x**2) + self.weights[1]*x + self.weights[0])
+		elif len(self.weights) == 3: # if quadratic
+			for x in x_vector:
+				y_vector_predict.append(self.weights[2]*(x**2) + self.weights[1]*x + self.weights[0])
+		elif len(self.weights) == 2: # if linear
+			for x in x_vector:
+				y_vector_predict.append(self.weights[1]*x + self.weights[0])
+
+		for (p, t) in zip(y_vector_predict, y_vector_test):
+			final_total_error += (p - t)**2
+
+		print('Sum-squared error for ' + str(plot_title) + ': ' + str(final_total_error))
+
+		plt.plot(x_vector, y_vector_predict, '-b', label='Predicted')
+		plt.scatter(test_times, y_vector_test, c='red', label = "Actual")
+		plt.text(-1.5, 2, "Total Sum-squared Error: " + str(final_total_error))
+		plt.title(plot_title)
+		plt.xlabel('Time (in hours)')
+		plt.ylabel('Energy (in kW)')
+		plt.legend()
+		plt.show()
+
 
 	def print_results(self):
 		i = 0

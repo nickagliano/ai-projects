@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import csv
 
 # Max/Min Group A
-with open('Project3_data/train_data_1.csv', 'rt') as csvfile:
+with open('Project3_data/test_data_4.csv', 'rt') as csvfile:
 	train_data_1 = np.array(list(csv.reader(csvfile))).astype(np.float)
 
 	# print('data before scaling')
@@ -23,7 +23,7 @@ with open('Project3_data/train_data_1.csv', 'rt') as csvfile:
 	plt.show()
 
 
-with open('Project3_data/scaled/train_data_1.csv', mode='w') as file:
+with open('Project3_data/scaled/test_data_4.csv', mode='w') as file:
 	writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
 	for row in X_std:
