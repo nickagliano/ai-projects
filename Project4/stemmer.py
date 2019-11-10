@@ -343,6 +343,29 @@ class PorterStemmer:
 		self.step5()
 		return self.b[self.k0:self.k+1]
 
+	def nick(self, f):
+		p = PorterStemmer()
+		tokenizedSentences = []
+		infile = open(f, 'r')
+		while 1:
+			output = ''
+			word = ''
+			line = infile.readline()
+			if line == '':
+				break
+			for c in line:
+				if c.isalpha():
+					word += c.lower()
+				else:
+					if word:
+						output += p.stem(word, 0,len(word)-1)
+						word = ''
+					output += c.lower()
+			tokenizedSentences.append(output)
+			# print output,
+		return tokenizedSentences
+		infile.close()
+
 if __name__ == '__main__':
 	p = PorterStemmer()
 	if len(sys.argv) > 1:
