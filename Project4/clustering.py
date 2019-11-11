@@ -1,5 +1,7 @@
 import pandas as pd
 import math
+# import matplotlib.pyplot as plt
+import numpy as np
 
 #creates a dictionary with total instances of all words in all documents
 def allWordCount(allWordDict,sentenceDict):
@@ -37,8 +39,42 @@ def tf_idf(tfList,idfDict,tf_idfList):
 
     return tf_idfList
 
+def euclidean_distance(s1,s2):
+    dist = 0
+    for word1, word2 in zip(s1,s2):
+        dist += (word1 + word2)**2
+
+    return math.sqrt(dist)
+
+def kmeans(tf_idfList):
+    #initialize centroids
+    k = 3
+    i = 1
+    centroids = []
+    while i < k+1:
+        centroids.append(tf_idfList[i])
+        i+=1
+
+    # while i < 10:
+    clusters = {}
+    for n in range(k):
+        clusters[n] = []
+
+    num = 1
+    for sentence in tf_idfList:
+        dist = []
+        for centroid in centroids:
+            dist.append(euclidean_distance(sentence,centroid))
+        topic = dist.index(min(dist))
+        sentence.insert(0,num)
+        clusters[topic].append(sentence)
+
+        num+=1
+
+    return clusters
+
 #read in csv and store into pandas dataframe
-file = ('test.csv')
+file = ('Project4_data/test.csv')
 filedf = pd.read_csv(file)
 
 sentenceList = []
@@ -47,16 +83,6 @@ i = 0
 while i < len(filedf):
     sentenceList.append(filedf.iloc[i].to_dict())
     i += 1
-
-# sentenceDict1 = filedf.iloc[0].to_dict()
-# sentenceDict2 = filedf.iloc[1].to_dict()
-# sentenceDict3 = filedf.iloc[2].to_dict()
-# sentenceDict4 = filedf.iloc[3].to_dict()
-#
-# sentenceList.append(sentenceDict1)
-# sentenceList.append(sentenceDict2)
-# sentenceList.append(sentenceDict3)
-# sentenceList.append(sentenceDict4)
 
 tfList = []
 idfDict = {}
@@ -82,7 +108,5 @@ tf_idfList.append(tempList)
 
 tf_idfList = tf_idf(tfList,idfDict,tf_idfList)
 
-# print(tfList)
-# print(idfDict)
-for a in tf_idfList:
-    print(a)
+cluster = kmeans(tf_idfList[1:])
+print(cluster[0])
