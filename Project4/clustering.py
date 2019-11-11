@@ -2,6 +2,8 @@ import pandas as pd
 import math
 # import matplotlib.pyplot as plt
 import numpy as np
+import random
+from collections import defaultdict
 
 #creates a dictionary with total instances of all words in all documents
 def allWordCount(allWordDict,sentenceDict):
@@ -46,6 +48,42 @@ def euclidean_distance(s1,s2):
 
     return math.sqrt(dist)
 
+def fcan(tf_idfList):
+    # random.shuffle(tf_idfList)
+    mindist = 0.1
+    centroids = []
+    # centroids.append(tf_idfList[0])
+    clusters = defaultdict(list)
+    # clusters[0] = tf_idfList[0]
+    i = 1
+
+    for sentence in tf_idfList:
+        dist = []
+        newcentroid = True
+        for centroid in centroids:
+            dist.append(euclidean_distance(sentence,centroid))
+
+        if len(dist) == 0:
+            None
+
+        elif min(dist) < mindist:
+            # print(len(dist))
+            # print(len(clusters))
+            clusters[dist.index(min(dist))].append(sentence)
+            newcentroid = False
+            #update clusters
+            #newcentroid = False
+
+        sentence.append(i)
+        if newcentroid:
+            centroids.append(sentence)
+            clusters[tf_idfList.index(sentence)] = [sentence]
+
+        i += 1
+
+    return clusters
+
+
 def kmeans(tf_idfList):
     #initialize centroids
     k = 3
@@ -55,7 +93,6 @@ def kmeans(tf_idfList):
         centroids.append(tf_idfList[i])
         i+=1
 
-    # while i < 10:
     clusters = {}
     for n in range(k):
         clusters[n] = []
@@ -108,5 +145,6 @@ tf_idfList.append(tempList)
 
 tf_idfList = tf_idf(tfList,idfDict,tf_idfList)
 
-cluster = kmeans(tf_idfList[1:])
-print(cluster[0])
+cluster = fcan(tf_idfList[1:])
+for a in cluster:
+    print(len(cluster[a]))
