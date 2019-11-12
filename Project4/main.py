@@ -70,7 +70,7 @@ print(len(globalWords))
 print(globalOccurances)
 
 for (word, count) in zip(globalWords, globalOccurances):
-	if count < 4:
+	if count < 2:
 		index = globalWords.index(word)
 		globalWords.remove(word)
 		del globalOccurances[index]
