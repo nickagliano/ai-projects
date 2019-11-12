@@ -70,7 +70,7 @@ print(len(globalWords))
 print(globalOccurances)
 
 for (word, count) in zip(globalWords, globalOccurances):
-	if count < 4:
+	if count < 2:
 		index = globalWords.index(word)
 		globalWords.remove(word)
 		del globalOccurances[index]
@@ -78,7 +78,7 @@ for (word, count) in zip(globalWords, globalOccurances):
 print(len(globalWords))
 
 
-with open('Project4_data/test.csv', mode='w') as file:
+with open('Project4_data/test_more_features.csv', mode='w') as file:
 	writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 	writer.writerow(globalWords)
 	for sentence in tokenizedSentences:
