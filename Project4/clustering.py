@@ -1,63 +1,58 @@
 import pandas as pd
 import math
-# import matplotlib.pyplot as plt
 import numpy as np
 import random
 from collections import defaultdict
+from operator import add, truediv
 
 #creates a dictionary with total instances of all words in all documents
 def allWordCount(allWordDict,sentenceDict):
     for word in allWordDict:
         allWordDict[word] = int(allWordDict[word]) + int(sentenceDict[word])
 
-#calculates term frequency for every term in a sentence
-def tf(sentence):
-    totalwords = len(sentence)
-    termFrequency = {}
-    for word in sentence:
-        termFrequency[word] = sentence[word]/totalwords
-    return termFrequency
-
-#calculates inverse document frequency for all documents
-def idf(idfDict,sentenceList):
-    for sentence in sentenceList:
-        for word in sentence:
-            if sentence[word] > 0:
-                idfDict[word] += 1
-
-    for word in idfDict:
-        idfDict[word] = math.log(len(sentenceList) / float(idfDict[word]))
-
-    return idfDict
-
-#calculates weights for every term in each sentence
-def tf_idf(tfList,idfDict,tf_idfList):
-    for sentence in tfList:
-        tempList = []
-        for word in sentence:
-            tempList.append(sentence[word] * idfDict[word])
-
-        tf_idfList.append(tempList)
-
-    return tf_idfList
 
 def euclidean_distance(s1,s2):
     dist = 0
     for word1, word2 in zip(s1,s2):
         dist += (word1 + word2)**2
-
+    print(math.sqrt(dist))
     return math.sqrt(dist)
 
-def fcan(tf_idfList):
-    # random.shuffle(tf_idfList)
-    mindist = 0.1
+#pass in cluster which contains all sentences in that cluster so far
+#
+def updateweights(wk,cluster,sentence):
+    # templist = [0]*len(sentence)
+    i = 0
+    for item in wk:
+        wk[i] = item * (len(cluster))
+        i += 1
+
+    for s in cluster:
+        wk = list(map(add,wk,s))
+
+
+
+    wk = list(map(add,wk,sentence))
+    # print("before")
+    # print(templist)
+    i = 0
+    for item in wk:
+        wk[i] = item / (len(cluster)+1)
+        i += 1
+    # print("after")
+    # print(templist)
+    # print(wk)
+    # print("")
+    return wk
+
+def fcan(sentenceList):
+    random.shuffle(sentenceList)
+    mindist = 4
     centroids = []
-    # centroids.append(tf_idfList[0])
     clusters = defaultdict(list)
-    # clusters[0] = tf_idfList[0]
     i = 1
 
-    for sentence in tf_idfList:
+    for sentence in sentenceList:
         dist = []
         newcentroid = True
         for centroid in centroids:
@@ -67,84 +62,38 @@ def fcan(tf_idfList):
             None
 
         elif min(dist) < mindist:
-            # print(len(dist))
-            # print(len(clusters))
+            # centroids[dist.index(min(dist))] = list(map(add,centroids[dist.index(min(dist))],updateweights(clusters[dist.index(min(dist))],sentence)))
+            centroids[dist.index(min(dist))] = updateweights(centroids[dist.index(min(dist))],clusters[dist.index(min(dist))],sentence)
+            print(i)
             clusters[dist.index(min(dist))].append(sentence)
             newcentroid = False
-            #update clusters
-            #newcentroid = False
 
-        sentence.append(i)
         if newcentroid:
             centroids.append(sentence)
-            clusters[tf_idfList.index(sentence)] = [sentence]
+            clusters[sentenceList.index(sentence)] = [sentence]
 
         i += 1
 
     return clusters
 
 
-def kmeans(tf_idfList):
-    #initialize centroids
-    k = 3
-    i = 1
-    centroids = []
-    while i < k+1:
-        centroids.append(tf_idfList[i])
-        i+=1
-
-    clusters = {}
-    for n in range(k):
-        clusters[n] = []
-
-    num = 1
-    for sentence in tf_idfList:
-        dist = []
-        for centroid in centroids:
-            dist.append(euclidean_distance(sentence,centroid))
-        topic = dist.index(min(dist))
-        sentence.insert(0,num)
-        clusters[topic].append(sentence)
-
-        num+=1
-
-    return clusters
-
 #read in csv and store into pandas dataframe
 file = ('Project4_data/test.csv')
 filedf = pd.read_csv(file)
 
 sentenceList = []
-
+sentenceindexlist = []
 i = 0
 while i < len(filedf):
-    sentenceList.append(filedf.iloc[i].to_dict())
+    sentenceList.append(filedf.iloc[i].tolist())
+    sentenceindexlist.append(filedf.iloc[i].tolist())
     i += 1
 
-tfList = []
-idfDict = {}
-tf_idfList = []
-
-allWordDict = {}
-for row in filedf:
-    allWordDict[row] = 0
-    idfDict[row] = 0
-
-for sentence in sentenceList:
-    allWordCount(allWordDict,sentence)
-
-for sentence in sentenceList:
-    tfList.append(tf(sentence))
-
-idfDict = idf(idfDict,sentenceList)
-tempList = []
-for a in filedf.iloc[0].items():
-    tempList.append(a[0])
-
-tf_idfList.append(tempList)
-
-tf_idfList = tf_idf(tfList,idfDict,tf_idfList)
-
-cluster = fcan(tf_idfList[1:])
+cluster = fcan(sentenceList)
+count = 1
 for a in cluster:
-    print(len(cluster[a]))
+    print("Cluster: " + str(count))
+    for b in cluster[a]:
+        # print(b)
+        print(sentenceindexlist.index(b) + 1)
+    count += 1
