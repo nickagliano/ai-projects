@@ -63,37 +63,44 @@ for sentence in tokenizedSentences:
 			globalWords.append(word)
 			globalOccurances.append(1)
 
-	# print(sentence)
-	# print(wordInSentence)
-	# print(wordOccurancesInSentence)
-print(len(globalWords))
-print(globalOccurances)
+# print(sentence)
+# print(wordInSentence)
+# print(wordOccurancesInSentence)
+# print(globalOccurances)
 
-for (word, count) in zip(globalWords, globalOccurances):
-	if count < 2:
-		index = globalWords.index(word)
-		globalWords.remove(word)
-		del globalOccurances[index]
+i = 0
+# for (word, count) in zip(globalWords, globalOccurances):
+# while i < len(globalWords):
+# 	if globalOccurances[i] < 4:
+# 		globalWords[i] = None
+# 		globalOccurances[i] = 0
+# 	# print(str(globalWords[i]) + ' ' + str(globalOccurances[i]))
+# 	i+=1
 
-print(len(globalWords))
+# globalWords = list(filter(lambda a: a != None, globalWords))
+# globalOccurances = list(filter(lambda a: a != 0, globalOccurances))
+# print(globalWords)
+# print(globalOccurances)
+
+# print(len(globalWords))
 
 
-with open('Project4_data/test_more_features.csv', mode='w') as file:
+with open('Project4_data/feature_vector.csv', mode='w') as file:
 	writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 	writer.writerow(globalWords)
-	for sentence in tokenizedSentences:
-		wordInSentence = []
-		wordOccurancesInSentence = []
-		for word in sentence:
-			if word in wordInSentence: # word is already in local sentence list
-				index = wordInSentence.index(word)
-				wordOccurancesInSentence[index] += 1
-			else:	# word needs to be added to local sentence list
-				wordInSentence.append(word)
-				wordOccurancesInSentence.append(1)
-		newRow = [0] * len(globalWords)
-		for (word, count) in zip(wordInSentence, wordOccurancesInSentence):
-			if word in globalWords:
-				index = globalWords.index(word)
-				newRow[index] = count
-		writer.writerow(newRow)
+	# for sentence in tokenizedSentences:
+	# 	wordInSentence = []
+	# 	wordOccurancesInSentence = []
+	# 	for word in sentence:
+	# 		if word in wordInSentence: # word is already in local sentence list
+	# 			index = wordInSentence.index(word)
+	# 			wordOccurancesInSentence[index] += 1
+	# 		else:	# word needs to be added to local sentence list
+	# 			wordInSentence.append(word)
+	# 			wordOccurancesInSentence.append(1)
+	# 	newRow = [0] * len(globalWords)
+	# 	for (word, count) in zip(wordInSentence, wordOccurancesInSentence):
+	# 		if word in globalWords:
+	# 			index = globalWords.index(word)
+	# 			newRow[index] = count
+	# 	writer.writerow(newRow)

@@ -15,7 +15,7 @@ def euclidean_distance(s1,s2):
     dist = 0
     for word1, word2 in zip(s1,s2):
         dist += (word1 + word2)**2
-    print(math.sqrt(dist))
+    # print(math.sqrt(dist))
     return math.sqrt(dist)
 
 #pass in cluster which contains all sentences in that cluster so far
@@ -47,7 +47,7 @@ def updateweights(wk,cluster,sentence):
 
 def fcan(sentenceList):
     random.shuffle(sentenceList)
-    mindist = 4
+    mindist = 12
     centroids = []
     clusters = defaultdict(list)
     i = 1
@@ -64,7 +64,6 @@ def fcan(sentenceList):
         elif min(dist) < mindist:
             # centroids[dist.index(min(dist))] = list(map(add,centroids[dist.index(min(dist))],updateweights(clusters[dist.index(min(dist))],sentence)))
             centroids[dist.index(min(dist))] = updateweights(centroids[dist.index(min(dist))],clusters[dist.index(min(dist))],sentence)
-            print(i)
             clusters[dist.index(min(dist))].append(sentence)
             newcentroid = False
 
@@ -78,7 +77,7 @@ def fcan(sentenceList):
 
 
 #read in csv and store into pandas dataframe
-file = ('Project4_data/test.csv')
+file = ('Project4_data/test_less_features.csv')
 filedf = pd.read_csv(file)
 
 sentenceList = []
@@ -95,5 +94,5 @@ for a in cluster:
     print("Cluster: " + str(count))
     for b in cluster[a]:
         # print(b)
-        print(sentenceindexlist.index(b) + 1)
+        print(sentenceList.index(b) + 1)
     count += 1
